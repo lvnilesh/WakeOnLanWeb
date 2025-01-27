@@ -2,7 +2,8 @@ from flask import Flask, render_template
 import subprocess
 
 SCRIPT = 'wake.py'
-MAC_ADDRESS = '10:FF:E0:6F:F3:68'
+# Modify Mac Address below
+MAC_ADDRESS = 'XX:XX:XX:XX:XX:XX'
 
 app = Flask(__name__)
 
