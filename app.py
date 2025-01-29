@@ -44,7 +44,7 @@ def shutdown():
 
 @app.route('/restart')
 def restart():
-    subprocess.call(['ssh', '-p', PASSWORD, 'ssh', REMOTE, 'shutdown /r /f /t 0'])
+    subprocess.call(['sshpass', '-p', PASSWORD, 'ssh', REMOTE, 'shutdown /r /f /t 0'])
     print(f"{datetime.now()} - Restarting PC")
     return "Restarting PC"
 
