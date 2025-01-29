@@ -4,60 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>eeWOL</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #000000;
-            color: #333;
-        }
-        .container {
-            text-align: center;
-        }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-        button {
-            background-color: red;
-            color: black;
-            padding: 15px 30px;
-            font-size: 1.5em;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        button:hover {
-            background-color: darkred;
-        }
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2em;
-            }
-            button {
-                padding: 10px 20px;
-                font-size: 1.2em;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Turn on PC</h1>
-        <button onclick="runScript()">Turn On</button>
+        <button onclick="turnon()">Turn On PC</button>
+        <button onclick="restart()">Restart PC</button>
+        <button onclick="shutdown()">Turn Off PC</button>
     </div>
 
-    <script>
-        function runScript() {
-            fetch('/run-script')
-                .then(response => response.text())
-                // .then(data => alert(data));
-        }
-    </script>
+    <script src="{{ url_for('static', filename='power_actions.js') }}"></script>
 </body>
 </html>
