@@ -1,13 +1,14 @@
 from flask import Flask, render_template
 from datetime import datetime
 
+import os
 import socket
 import subprocess
 
 # Configure the below
-MAC_ADDRESS = ''
-PASSWORD = ''
-REMOTE = ''
+MAC_ADDRESS = os.getenv('PC_MAC_ADDRESS', 'default_mac_address')
+PASSWORD = os.getenv('PC_PASSWORD', 'default_password')
+REMOTE = os.getenv('PC_REMOTE', 'default_remote')
 
 app = Flask(__name__)
 
