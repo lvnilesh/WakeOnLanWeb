@@ -1,6 +1,7 @@
 services:
   wol:
     build: .
+    image: reg.home.cloudgeni.us/wol
     # ports:
     #   - "5090:5090"
     network_mode: "host"

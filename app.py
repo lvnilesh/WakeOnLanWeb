@@ -39,13 +39,13 @@ def turnon():
 
 @app.route('/shutdown')
 def shutdown():
-    subprocess.call(['/usr/bin/sshpass', '-p', PASSWORD, 'ssh', REMOTE, 'cmd.exe /c shutdown /s /f /t 0'])
+    subprocess.call(['/usr/bin/sshpass', '-p', PASSWORD, 'ssh', '-o', 'StrictHostKeyChecking=no', REMOTE, 'cmd.exe /c shutdown /s /f /t 0'])
     print(f"{datetime.now()} - Turned off PC")
     return "Turned off PC"
 
 @app.route('/restart')
 def restart():
-    subprocess.call(['/usr/bin/sshpass', '-p', PASSWORD, 'ssh', REMOTE, 'cmd.exe /c shutdown /r /f /t 0'])
+    subprocess.call(['/usr/bin/sshpass', '-p', PASSWORD, 'ssh', '-o', 'StrictHostKeyChecking=no', REMOTE, 'cmd.exe /c shutdown /r /f /t 0'])
     print(f"{datetime.now()} - Restarting PC")
     return "Restarting PC"
 
