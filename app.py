@@ -6,7 +6,8 @@ import socket
 import subprocess
 
 # Configure the below
-MAC_ADDRESS = os.getenv('PC_MAC_ADDRESS', '08:BF:B8:29:46:42')
+PC_MAC_ADDRESS = os.getenv('PC_MAC_ADDRESS', '08:BF:B8:29:46:42')
+# MAC_MAC_ADDRESS = os.getenv('PC_MAC_ADDRESS', '14:98:77:74:8C:2C')  
 PASSWORD = os.getenv('PC_PASSWORD', 'cdcd')
 REMOTE = os.getenv('PC_REMOTE', '192.168.1.14')
 
@@ -34,18 +35,21 @@ def home():
 
 @app.route('/turnon')
 def turnon():
-    wake_on_lan(MAC_ADDRESS)
+    wake_on_lan(PC_MAC_ADDRESS)
+    # wake_on_lan(MAC_MAC_ADDRESS)
     return "Turned on PC"
 
 @app.route('/shutdown')
 def shutdown():
     subprocess.call(['/usr/bin/sshpass', '-p', PASSWORD, 'ssh', '-o', 'StrictHostKeyChecking=no', REMOTE, 'cmd.exe /c shutdown /s /f /t 0'])
+    # subprocess.call(['/usr/bin/sshpass', '-p', PASSWORD, 'ssh', '-o', 'StrictHostKeyChecking=no', "m1.cg.home.arpa", 'sudo shutdown -h now'])    
     print(f"{datetime.now()} - Turned off PC")
     return "Turned off PC"
 
 @app.route('/restart')
 def restart():
     subprocess.call(['/usr/bin/sshpass', '-p', PASSWORD, 'ssh', '-o', 'StrictHostKeyChecking=no', REMOTE, 'cmd.exe /c shutdown /r /f /t 0'])
+    # subprocess.call(['/usr/bin/sshpass', '-p', PASSWORD, 'ssh', '-o', 'StrictHostKeyChecking=no', "m1.cg.home.arpa", 'sudo reboot'])
     print(f"{datetime.now()} - Restarting PC")
     return "Restarting PC"
 
