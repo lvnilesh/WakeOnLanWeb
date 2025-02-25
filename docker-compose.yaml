@@ -1,0 +1,15 @@
+services:
+  wol:
+    build: .
+    # ports:
+    #   - "5090:5090"
+    network_mode: "host"
+    volumes:
+      - .:/app
+    environment:
+      - FLASK_APP=app/__init__.py
+      - MAC_ADDRESS = 08:BF:B8:29:46:42
+      - PASSWORD = cdcd
+      - REMOTE = asus.cg.home.arpa
+    # command: flask run --host=0.0.0.0
+    command: gunicorn --bind 0.0.0.0:5090 app:app

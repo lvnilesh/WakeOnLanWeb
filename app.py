@@ -6,13 +6,13 @@ import socket
 import subprocess
 
 # Configure the below
-MAC_ADDRESS = os.getenv('PC_MAC_ADDRESS', 'default_mac_address')
-PASSWORD = os.getenv('PC_PASSWORD', 'default_password')
-REMOTE = os.getenv('PC_REMOTE', 'default_remote')
+MAC_ADDRESS = os.getenv('PC_MAC_ADDRESS', '08:BF:B8:29:46:42')
+PASSWORD = os.getenv('PC_PASSWORD', 'cdcd')
+REMOTE = os.getenv('PC_REMOTE', '192.168.1.14')
 
 app = Flask(__name__)
 
-@staticmethod
+# @staticmethod
 def wake_on_lan(mac_address):
     # Check if the MAC address is valid
     if len(mac_address) == 17 and mac_address.count(':') == 5:
@@ -39,15 +39,15 @@ def turnon():
 
 @app.route('/shutdown')
 def shutdown():
-    subprocess.call(['sshpass', '-p', PASSWORD, 'ssh', REMOTE, 'shutdown /s /f /t 0'])
+    subprocess.call(['/usr/bin/sshpass', '-p', PASSWORD, 'ssh', REMOTE, 'cmd.exe /c shutdown /s /f /t 0'])
     print(f"{datetime.now()} - Turned off PC")
     return "Turned off PC"
 
 @app.route('/restart')
 def restart():
-    subprocess.call(['sshpass', '-p', PASSWORD, 'ssh', REMOTE, 'shutdown /r /f /t 0'])
+    subprocess.call(['/usr/bin/sshpass', '-p', PASSWORD, 'ssh', REMOTE, 'cmd.exe /c shutdown /r /f /t 0'])
     print(f"{datetime.now()} - Restarting PC")
     return "Restarting PC"
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5090)
