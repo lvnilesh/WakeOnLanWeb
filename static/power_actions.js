@@ -5,6 +5,13 @@ function turnon() {
       .catch(error => console.error('Error:', error));
 }
 
+
+function fw() {
+  fetch('/fw')
+      .then(response => response.text())
+      .catch(error => console.error('Error:', error));
+}
+
 function restart() {
   fetch('/restart')
       .then(response => response.text())

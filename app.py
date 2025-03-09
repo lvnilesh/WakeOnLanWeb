@@ -46,6 +46,12 @@ def shutdown():
     print(f"{datetime.now()} - Turned off PC")
     return "Turned off PC"
 
+@app.route('/fw')
+def fw():
+    subprocess.call(['/usr/bin/sshpass', '-p', PASSWORD, 'ssh', '-o', 'StrictHostKeyChecking=no',  REMOTE, 'cmd.exe /c shutdown /r /fw /t 0'])
+    print("uefi")
+    return "UEFI"
+
 @app.route('/restart')
 def restart():
     subprocess.call(['/usr/bin/sshpass', '-p', PASSWORD, 'ssh', '-o', 'StrictHostKeyChecking=no', REMOTE, 'cmd.exe /c shutdown /r /f /t 0'])
